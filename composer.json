@@ -4,5 +4,6 @@
         "fzaninotto/faker": "^1.9",
         "kint-php/kint": "^4.1",
         "jasongrimes/paginator": "^1.0"
+        
     }
 }

@@ -9,11 +9,12 @@
 <?php
 
 require '../vendor/autoload.php';
+//use Faker\Factory;
 use Aura\SqlQuery\QueryFactory;
-
+use JasonGrimes\Paginator;
 
 // подключаем Класс, можем используем
-$faker = Faker\Factory::create();
+// $faker = Faker\Factory::create();
 
 
 //d($faker->text); exit;
@@ -55,7 +56,7 @@ $select
     ->cols(['*'])
     ->from('posts')
     ->setPaging(3)                // принимает сколько записей вывести
-    ->page($_GET['page'] ?? 10);   // если $_GET['page']==2 - то записи с 4 по 6, а если отсутствует, то 1 страница по умолчанию, то есть первые три записи
+    ->page($_GET['page'] ?? 1);   // если $_GET['page']==2 - то записи с 4 по 6, а если отсутствует, то 1 страница по умолчанию, то есть первые три записи
 $sth = $pdo->prepare($select->getStatement());
 $sth->execute($select->getBindValues());
 $items = $sth->fetchAll(PDO::FETCH_ASSOC);
@@ -74,7 +75,7 @@ foreach($items as $item) {
 
 <ul class="paginator">
     <?php if ($paginator->getPrevURL()): ?>
-        <li><a href="<?php echo "$paginator->getPrevURL()";?>"> &laquo; Previous </a> </li>
+        <li><a href="<?php echo "$paginator->getPrevURL()";?>"> &laquo; Предыдущая </a> </li>
     <?php endif; ?>
 
     <?php foreach ($paginator->getPages() as $page): ?>
@@ -89,14 +90,14 @@ foreach($items as $item) {
     <?php endforeach; ?>
 
     <?php if ($paginator->getNextURL()): ?>
-        <li><a href="<?php echo "$paginator->getNextURL()";?>"> Next &raquo </a> </li>
+        <li><a href="<?php echo "$paginator->getNextURL()";?>"> Следующая &raquo </a> </li>
     <?php endif; ?>
 </ul>   
 
 <p>
-    <?php echo $paginator->getTotalItems(); ?> found.
+    <?php echo $paginator->getTotalItems(); ?> найдено записей.
 
-    Showing
+    Показаны
     <?php echo $paginator->getCurrentPageFirstItem(); ?>
     -
     <?php echo $paginator->getCurrentPageLastItem(); ?>
