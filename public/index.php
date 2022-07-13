@@ -75,7 +75,7 @@ foreach($items as $item) {
 
 <ul class="paginator">
     <?php if ($paginator->getPrevURL()): ?>
-        <li><a href="<?php echo "$paginator->getPrevURL()";?>"> &laquo; Предыдущая </a> </li>
+        <li><a href="<?php echo $paginator->getPrevURL();?>"> &laquo; Предыдущая </a> </li>
     <?php endif; ?>
 
     <?php foreach ($paginator->getPages() as $page): ?>
@@ -90,7 +90,7 @@ foreach($items as $item) {
     <?php endforeach; ?>
 
     <?php if ($paginator->getNextURL()): ?>
-        <li><a href="<?php echo "$paginator->getNextURL()";?>"> Следующая &raquo </a> </li>
+        <li><a href="<?php echo $paginator->getNextURL();?>"> Следующая &raquo </a> </li>
     <?php endif; ?>
 </ul>   
 
